@@ -23,14 +23,25 @@
 			</div>
 		</form>
 		
+		<div>
+		
+			<a href="${pageContext.request.contextPath}/listMember">회원가입</a>
+			
+		</div>
+		
 	</c:if>
 	
 	<!-- 로그인 후 -->
 	<c:if test="${sessionMember != null}">
 	
 		<div>${sessionMember.memberId} 님 반갑습니다.</div>
-		<div><a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a></div>
-		<div><a href="/auth/">다이어리</a></div>
+		<div>
+			<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
+			<a href="${pageContext.request.contextPath}/auth/modifyMember">정보수정</a>
+			<!--  -->
+			<a href="${pageContext.request.contextPath}/auth/removeMember">회원탈퇴</a>
+		</div>
+		<div><a href="${pageContext.request.contextPath}/auth/diary">다이어리</a></div>
 		
 	</c:if>
 </body>
