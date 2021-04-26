@@ -3,43 +3,33 @@ package gdu.diary.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import gdu.diary.dao.ADao;
-import gdu.diary.dao.BDao;
+import gdu.diary.dao.TodoDao;
 import gdu.diary.util.DBUtil;
+import gdu.diary.vo.Todo;
 
-public class ABService {
-	
+public class TodoService {
+	private TodoDao todoDao;
 	private DBUtil dbUtil;
-	private ADao aDao;
-	private BDao bDao;
 	
-	public void insert() {
-		
+	// todo 추가 서비스
+	public int addTodo(Todo todo) {
 		this.dbUtil = new DBUtil();
-		this.aDao = new ADao();
-		this.bDao = new BDao();
+		this.todoDao = new TodoDao();
 		
 		Connection conn = null;
+		int rowCnt = 0;
 		
 		try {
 			
-			conn = this.dbUtil.getConnection();
-			conn.setAutoCommit(false);
-			
-			aDao.insert(conn);
-			bDao.insert(conn);
-			
+			conn = dbUtil.getConnection();
+			rowCnt = this.todoDao.insertTodo(conn, todo);
 			conn.commit();
 			
-		} catch (SQLException e) {
-			
+		} catch(SQLException e) {
 			try {
-				
 				conn.rollback();
-				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
-			
 			}
 			e.printStackTrace();
 			
@@ -47,12 +37,10 @@ public class ABService {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
+		return rowCnt;
 	}
 
 }

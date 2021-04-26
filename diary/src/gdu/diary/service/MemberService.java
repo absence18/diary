@@ -42,7 +42,11 @@ public class MemberService {
 			return false;
 			
 		} finally {
-			dbUtil.close(conn, null, null);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		return rowCnt > 0;
@@ -76,7 +80,11 @@ public class MemberService {
 			e.printStackTrace();
 			
 		} finally {
-			dbUtil.close(conn, null, null);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		return returnCnt;
@@ -115,7 +123,11 @@ public class MemberService {
 			return false;
 			
 		} finally {
-			this.dbUtil.close(conn, null, null);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		return (todoRowCnt + memberRowCnt) > 0;
@@ -149,7 +161,11 @@ public class MemberService {
 			e.printStackTrace();
 			
 		} finally {
-			this.dbUtil.close(conn, null, null);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		return returnMember;

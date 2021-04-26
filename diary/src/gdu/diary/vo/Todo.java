@@ -2,13 +2,21 @@ package gdu.diary.vo;
 
 public class Todo {
 	
+	private int todoNo;
 	private int todoMember;
 	private int memberNo;
 	private String todoDate;
 	private String todoTitle;
 	private String todoContent;
 	private String todoFontColor;
+	private String todoAddDate;
 	
+	public int getTodoNo() {
+		return todoNo;
+	}
+	public void setTodoNo(int todoNo) {
+		this.todoNo = todoNo;
+	}
 	public int getTodoMember() {
 		return todoMember;
 	}
@@ -45,11 +53,18 @@ public class Todo {
 	public void setTodoFontColor(String todoFontColor) {
 		this.todoFontColor = todoFontColor;
 	}
+	public String getTodoAddDate() {
+		return todoAddDate;
+	}
+	public void setTodoAddDate(String todoAddDate) {
+		this.todoAddDate = todoAddDate;
+	}
 	
 	@Override
 	public String toString() {
-		return "Todo [todoMember=" + todoMember + ", memberNo=" + memberNo + ", todoDate=" + todoDate + ", todoTitle="
-				+ todoTitle + ", todoContent=" + todoContent + ", todoFontColor=" + todoFontColor + "]";
+		return "Todo [todoNo=" + todoNo + ", todoMember=" + todoMember + ", memberNo=" + memberNo + ", todoDate="
+				+ todoDate + ", todoTitle=" + todoTitle + ", todoContent=" + todoContent + ", todoFontColor="
+				+ todoFontColor + ", todoAddDate=" + todoAddDate + "]";
 	}
-
+	
 }

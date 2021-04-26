@@ -10,13 +10,9 @@ import gdu.diary.vo.Member;
 
 public class MemberDao {
 	
-	private DBUtil dbUtil;
-	
 	// 회원 정보 수정 메소드
 	public int updateMemberByKey(Connection conn, Member member) throws SQLException{
 		
-		this.dbUtil = new DBUtil();
-
 		int rowCnt = 0;
 		PreparedStatement stmt = null;
 		
@@ -29,8 +25,7 @@ public class MemberDao {
 			rowCnt = stmt.executeUpdate();
 
 		} finally {
-			//여기서 conn을 닫으면 안됨. 롤백 불가능
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 			
 		}
 		return rowCnt;
@@ -40,8 +35,6 @@ public class MemberDao {
 	// 회원 가입 메소드
 	public int insertMemberByKey(Connection conn, Member member)  throws SQLException{
 		
-		this.dbUtil = new DBUtil();
-
 		int rowCnt = 0;
 		PreparedStatement stmt = null;
 
@@ -53,7 +46,7 @@ public class MemberDao {
 			rowCnt = stmt.executeUpdate();
 
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 			
 		}
 		return rowCnt;
@@ -62,8 +55,6 @@ public class MemberDao {
 	
 	// 회원 삭제 메서드
 	public int deleteMemberByKey(Connection conn, Member member) throws SQLException {
-		
-		this.dbUtil = new DBUtil();
 		
 		int rowCnt = 0;
 		PreparedStatement stmt = null;
@@ -77,7 +68,7 @@ public class MemberDao {
 			rowCnt = stmt.executeUpdate();
 			
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 			
 		}
 		return rowCnt;
@@ -87,7 +78,6 @@ public class MemberDao {
 	// 로그인 메서드
 	public Member selectMemberByKey(Connection conn, Member member) throws SQLException {
 		
-		this.dbUtil = new DBUtil();
 		Member returnMember = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -109,7 +99,8 @@ public class MemberDao {
 		
 			
 		} finally {
-			this.dbUtil.close(null, stmt, rs);
+			rs.close();
+			stmt.close();
 			
 		}
 		return returnMember;
