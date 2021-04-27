@@ -99,12 +99,15 @@ public class DiaryService {
 		this.todoDao = new TodoDao();
 		
 		List<Todo> todoList = null;
+		List<Map<String, Object>> ddayList = null;
+		
 		Connection conn = null;		
 		
 		try {
 			
 			conn = this.dbUtil.getConnection();
 			todoList = this.todoDao.selectTodoListByDate(conn, memberNo, target.get(Calendar.YEAR), target.get(Calendar.MONTH)+1);
+			ddayList = this.todoDao.selectTodoDdayList(conn, memberNo);
 			conn.commit();
 			
 		} catch (SQLException e) {
@@ -124,6 +127,7 @@ public class DiaryService {
 			}
 		}
 		map.put("todoList", todoList);
+		map.put("ddayList", ddayList);
 		
 		return map;
 	}

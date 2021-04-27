@@ -7,6 +7,28 @@
 <title>diary</title>
 </head>
 <body>
+
+	<!-- dday 코드 추가 -->
+	<h1>DDAY List</h1>
+	<div>
+		<table border="1">
+			<tr><th>todoDate</th><th>todoTitle</th><th>D-day</th></tr>
+			<c:forEach var="m" items="${diaryMap.ddayList}">
+				<tr>
+					<td>${m.todoDate}</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/auth/todoOne?todoNo=${m.todoNo}">
+							${m.todoTitle}
+						</a>
+					</td>
+					<td>-${m.dday}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<!-- dday 코드 끝 -->
+
+	<!-- <div>${diaryMap.todoList}</div> // 디버깅 코드 -->
 	<c:set var="totalCell" value="${diaryMap.startBlank + diaryMap.endDay + diaryMap.endBlank}"></c:set>
 	<div>totalCell : ${totalCell}</div>
 	
@@ -28,13 +50,14 @@
 							<div>${num}</div>
 							<div>
 								<c:forEach var="todo" items="${diaryMap.todoList}">
-									<c:if test="${todo.todoDate == num}">
-										<div style="background-color:${todo.todoFontColor}">
-                                            <a href="${pageContext.request.contextPath}/auth/todoOne">${todo.todoTitle}...</a>
-                                        </div>
-									</c:if>
-								</c:forEach>
-							</div>
+		                           <c:if test="${todo.todoDate == num}">
+		                              <div style="background-color: ${todo.todoFontColor}">
+		                              	<a href="${pageContext.request.contextPath}/auth/todoOne?todoNo=${todo.todoNo}">${todo.todoTitle}...</a>
+		                              </div>
+		                              <!-- todoOne 만들기 수정,삭제 -->
+		                           </c:if>
+	                        	</c:forEach>
+                     		</div>
 						</a>
 					</c:if>
 					<c:if test="${num <= 0 || num > diaryMap.endDay}">
